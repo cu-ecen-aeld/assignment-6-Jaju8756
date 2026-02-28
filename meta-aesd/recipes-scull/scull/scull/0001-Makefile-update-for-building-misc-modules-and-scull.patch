@@ -1,0 +1,23 @@
+From 3bbfdac2eb388297bb9ca0cba74e623a7dd87b4b Mon Sep 17 00:00:00 2001
+From: Jaju8756 <jaju8756@colorado.edu>
+Date: Sat, 28 Feb 2026 00:41:39 -0700
+Subject: [PATCH] Makefile update for building misc-modules and scull
+
+---
+ Makefile | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 7b08c49..eb6ed25 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,8 +1,5 @@
+ 
+-SUBDIRS =  misc-progs misc-modules \
+-           skull scull scullc scullp lddbus sculld scullv shortprint simple tty \
+-	   pci usb\
+-	   sbull snull short
++SUBDIRS = misc-modules scull
+ 
+ all: subdirs
+ 
