@@ -1,3 +1,5 @@
+inherit module update-rc.d
+
 # Recipe created by recipetool
 # This is the basis of a recipe and may need further editing in order to be fully functional.
 # (Feel free to remove these comments when editing.)
@@ -11,30 +13,25 @@
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=f098732a73b5f6f3430472f5b094ffdb"
 
-SRC_URI = "git://git@github.com/cu-ecen-aeld/assignment-7-Jaju8756.git;protocol=ssh;branch=main\
+SRC_URI = "git://github.com/cu-ecen-aeld/assignment-7-Jaju8756.git;protocol=https;branch=main\
 	   file://scull-init \
 	    "
 
 # Modify these as desired
 PV = "1.0+git${SRCPV}"
-SRCREV = "3bbfdac2eb388297bb9ca0cba74e623a7dd87b4b"
+SRCREV = "d6d0c0785194a6c3a34d5141ddc2a3a431f1a911"
 
 S = "${WORKDIR}/git"
 
-inherit module update-rc.d
-
 INITSCRIPT_NAME = "scull-init"
-INITSCRIPT_PARAMS = "defaults"
+INITSCRIPT_PARAMS = "start 04 S ."
 
 FILES:${PN} += "${sysconfdir}/init.d/scull-init"
 
-EXTRA_OEMAKE = " \
-    -C ${STAGING_KERNEL_DIR} \
-    M=${S}/scull \
-    EXTRA_CFLAGS='-I${S}/include' \
-"
+EXTRA_OEMAKE += "-C ${STAGING_KERNEL_DIR} M=${S}/scull EXTRA_CFLAGS=-I${S}/include"
 
-do_install() {
+
+do_install:append() {
     install -d ${D}${sysconfdir}/init.d
     install -m 0755 ${WORKDIR}/scull-init ${D}${sysconfdir}/init.d/
 }
